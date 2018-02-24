@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "908106350310",
+    "firebase_url": "https://lovely-29b98.firebaseio.com",
+    "project_id": "lovely-29b98",
+    "storage_bucket": "lovely-29b98.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:908106350310:android:8b0e35c8894fa450",
+        "android_client_info": {
+          "package_name": "com.instilive.lovely"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "908106350310-0rgcnae76e2jdurls29i8grumbafshmp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCHaPKJBvLqHSlv27bg-kiNle9pEtAW3EU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

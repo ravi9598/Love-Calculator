@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Lovely</string>
+    <string name="title_activity_home_page">HomePageActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="text_version">Version</string>
+    <string name="version_number">119.0.0.9</string>
+    <string name="product_by">A product by:</string>
+    <string name="ravi_prakash"><u>Ravi Prakash</u></string>
+    <string name="bittu_balram"><u>Valram-Vishwakarma</u></string>
+    <string name="atul_sagar"><u>Atul Sagar</u></string>
+    <string name="action_settings">Settings</string>
+</resources>
