@@ -11,12 +11,11 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class AboutUsActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private TextView nameTextViewRavi,nameTextViewBittu,nameTextViewAtul,jargonTextView;
-    private Toolbar toolbar;
-    private String LinkedIn_URL="https://www.linkedin.com/in/ravi-prakash-654b0a112";
-    private Context context;
+    private CircleImageView gitLogo,LinkedInRavi,LinkedInBittu,LinkedInAtul;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,14 +24,15 @@ public class AboutUsActivity extends AppCompatActivity implements View.OnClickLi
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_about_us);
 
-        jargonTextView=(TextView) findViewById(R.id.about_jargon);
-        nameTextViewRavi=(TextView)findViewById(R.id.ravi);
-        nameTextViewBittu=(TextView)findViewById(R.id.bittu);
-        nameTextViewAtul=(TextView)findViewById(R.id.atul);
+        gitLogo=(CircleImageView)findViewById(R.id.gitLogo);
+        LinkedInRavi=(CircleImageView)findViewById(R.id.ravi);
+        LinkedInBittu=(CircleImageView)findViewById(R.id.bittu);
+        LinkedInAtul=(CircleImageView)findViewById(R.id.atul);
 
-        nameTextViewRavi.setOnClickListener(this);
-        nameTextViewBittu.setOnClickListener(this);
-        nameTextViewAtul.setOnClickListener(this);
+        LinkedInRavi.setOnClickListener(this);
+        LinkedInBittu.setOnClickListener(this);
+        LinkedInAtul.setOnClickListener(this);
+        gitLogo.setOnClickListener(this);
 
     }
 
@@ -51,6 +51,11 @@ public class AboutUsActivity extends AppCompatActivity implements View.OnClickLi
         if (view.getId()==R.id.atul)
         {
             Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.linkedin.com/in/atul-sagar-80004a143/"));
+            startActivity(i);
+        }
+        if (view.getId()==R.id.gitLogo)
+        {
+            Intent i=new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/ravi9598/Lovely"));
             startActivity(i);
         }
     }

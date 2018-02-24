@@ -36,9 +36,9 @@ import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
-    private String checkLoggedIn;
-    private String isLoggedIn="NO";
-    private SQLiteDatabase database;
+//    private String checkLoggedIn;
+//    private String isLoggedIn="NO";
+    //private SQLiteDatabase database;
     private EditText etUserName;
     private Button btnRegister;
     private RadioGroup radioGroup;
@@ -55,25 +55,25 @@ public class MainActivity extends AppCompatActivity {
 
         databaseReference=FirebaseDatabase.getInstance().getReference().child("lovelyUsers");
 
-        database=openOrCreateDatabase("MyDB",android.content.Context.MODE_PRIVATE ,null);
-        database.execSQL("create table if not exists loveHistory (Name varchar, isLoggedIn varchar,UserName varchar,UserID varchar)");
+        //database=openOrCreateDatabase("MyDB",android.content.Context.MODE_PRIVATE ,null);
+        //database.execSQL("create table if not exists loveHistory (Name varchar, isLoggedIn varchar,UserName varchar,UserID varchar)");
 
-        Cursor cursor=database.rawQuery("select * from loveHistory",null);
+        //Cursor cursor=database.rawQuery("select * from loveHistory",null);
 
-        while (cursor.moveToNext())
-        {
-            checkLoggedIn=cursor.getString(1);
+//        while (cursor.moveToNext())
+//        {
+//            checkLoggedIn=cursor.getString(1);
+//
+//        }
 
-        }
+//        if (checkLoggedIn.equals("YES"))
+//        {
+//            Toast.makeText(this,checkLoggedIn, Toast.LENGTH_SHORT).show();
+//            Intent intent=new Intent(MainActivity.this,HomePageActivity.class);
+//            startActivity(intent);
+//            finish();
+//        }
 
-        if (checkLoggedIn.equals("YES"))
-        {
-            Toast.makeText(this,checkLoggedIn, Toast.LENGTH_SHORT).show();
-            Intent intent=new Intent(MainActivity.this,HomePageActivity.class);
-            startActivity(intent);
-            finish();
-        }
- 
         etUserName=(EditText)findViewById(R.id.userName);
         btnRegister=(Button)findViewById(R.id.registerBtn);
         radioGroup=(RadioGroup)findViewById(R.id.radioGroup);
@@ -101,8 +101,8 @@ public class MainActivity extends AppCompatActivity {
                 userName=etUserName.getText().toString();
                 if (!TextUtils.isEmpty(userName) && gender!=null)
                 {
-                    isLoggedIn="YES";
-                    database.execSQL("insert into loveHistory values('"+userName+"','"+isLoggedIn+"','"+userName+"','"+userID+"')");
+                    //isLoggedIn="YES";
+                    //database.execSQL("insert into loveHistory values('"+userName+"','"+isLoggedIn+"','"+userName+"','"+userID+"')");
                     Random rand = new Random();
                     long number = rand.nextInt(9999999)+1;
                     userID=userName+number+gender;

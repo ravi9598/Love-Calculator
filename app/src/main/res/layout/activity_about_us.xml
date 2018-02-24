@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-    android:background="#4274d1"
+    android:background="#4d7eda"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -21,7 +21,7 @@
     <LinearLayout
         android:layout_marginTop="30dp"
         android:orientation="vertical"
-        android:layout_marginLeft="35dp"
+        android:layout_marginLeft="26dp"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/about_name"
         android:layout_width="wrap_content"
@@ -29,7 +29,7 @@
 
         <TextView
             android:textColor="#B2BABB"
-            android:textSize="17sp"
+            android:textSize="18sp"
             android:layout_below="@+id/about_name"
             android:id="@+id/about_version"
             android:text="@string/text_version"
@@ -46,7 +46,7 @@
             android:layout_height="wrap_content" />
 
         <TextView
-            android:textSize="17sp"
+            android:textSize="18sp"
             android:textColor="#B2BABB"
             android:layout_marginTop="15dp"
             android:layout_below="@+id/about_version_number"
@@ -55,8 +55,31 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:textColor="#B2BABB"
+                android:textSize="18sp"
+                android:text="All the source code for Lovely is available for open source at"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/gitLogo"
+                android:src="@drawable/ic_icon_git"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center_vertical"
+                android:layout_width="40dp"
+                android:layout_height="40dp" />
+
+        </LinearLayout>
+
         <TextView
-            android:textSize="17sp"
+            android:textSize="18sp"
             android:textColor="#B2BABB"
             android:layout_marginTop="20dp"
             android:layout_below="@+id/about_jargon"
@@ -65,35 +88,77 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <TextView
-            android:id="@+id/ravi"
-            android:clickable="true"
-            android:textColor="#fff"
-            android:textSize="24sp"
-            android:text="@string/ravi_prakash"
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="45dp">
 
-        <TextView
-            android:layout_marginTop="5dp"
-            android:id="@+id/bittu"
-            android:clickable="true"
-            android:textColor="#fff"
-            android:textSize="24sp"
-            android:text="@string/bittu_balram"
+            <TextView
+                android:layout_gravity="center_vertical"
+                android:clickable="true"
+                android:textColor="#fff"
+                android:textSize="24sp"
+                android:text="@string/ravi_prakash"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/ravi"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="5dp"
+                android:src="@drawable/ic_icon_linkedin"
+                android:layout_width="40dp"
+                android:layout_height="40dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="45dp">
 
-        <TextView
-            android:layout_marginTop="5dp"
-            android:id="@+id/atul"
-            android:clickable="true"
-            android:textColor="#fff"
-            android:textSize="24sp"
-            android:text="@string/atul_sagar"
+            <TextView
+                android:layout_gravity="center_vertical"
+                android:clickable="true"
+                android:textColor="#fff"
+                android:textSize="24sp"
+                android:text="@string/bittu_balram"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/bittu"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="5dp"
+                android:src="@drawable/ic_icon_linkedin"
+                android:layout_width="40dp"
+                android:layout_height="40dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="45dp">
 
+            <TextView
+                android:layout_gravity="center_vertical"
+                android:clickable="true"
+                android:textColor="#fff"
+                android:textSize="24sp"
+                android:text="@string/atul_sagar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/atul"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="5dp"
+                android:src="@drawable/ic_icon_linkedin"
+                android:layout_width="40dp"
+                android:layout_height="40dp" />
+
+        </LinearLayout>
 
     </LinearLayout>
 

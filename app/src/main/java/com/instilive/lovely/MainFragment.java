@@ -28,6 +28,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class MainFragment extends Fragment{
 
+    private Bundle bundle;
     private DatabaseReference databaseReference;
     private String uID=null;
     private String userName;
@@ -43,10 +44,11 @@ public class MainFragment extends Fragment{
     public View onCreateView(final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
 
-        database=getActivity().openOrCreateDatabase("MyDB",android.content.Context.MODE_PRIVATE ,null);
-        Cursor cursor=database.rawQuery("select * from loveHistory",null);
-        userName=cursor.getString(cursor.getColumnIndex("UserName"));
-        uID=cursor.getString(cursor.getColumnIndex("UserID"));
+        bundle=getActivity().getIntent().getExtras();
+//        database=getActivity().openOrCreateDatabase("MyDB",android.content.Context.MODE_PRIVATE ,null);
+//        Cursor cursor=database.rawQuery("select * from loveHistory",null);
+        userName=bundle.getString("userName");
+        uID=bundle.getString("userID");
 
         databaseReference= FirebaseDatabase.getInstance().getReference().child("lovelyUsers").child(uID);
 
