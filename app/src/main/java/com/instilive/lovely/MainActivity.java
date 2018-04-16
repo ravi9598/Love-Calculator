@@ -1,7 +1,9 @@
 package com.instilive.lovely;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
@@ -36,43 +38,21 @@ import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
-//    private String checkLoggedIn;
-//    private String isLoggedIn="NO";
-    //private SQLiteDatabase database;
+    private SharedPrefManager sharedPrefManager;
     private EditText etUserName;
     private Button btnRegister;
     private RadioGroup radioGroup;
     private RadioButton radioButtonMale,radioButtonFemale;
-    String userName;
-    String gender=null;
-    private String userID;
-    private DatabaseReference databaseReference;
+    private String userName;
+    private String gender=null;
+    public static final String MyPREFERENCES = "MyPrefs" ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        databaseReference=FirebaseDatabase.getInstance().getReference().child("lovelyUsers");
-
-        //database=openOrCreateDatabase("MyDB",android.content.Context.MODE_PRIVATE ,null);
-        //database.execSQL("create table if not exists loveHistory (Name varchar, isLoggedIn varchar,UserName varchar,UserID varchar)");
-
-        //Cursor cursor=database.rawQuery("select * from loveHistory",null);
-
-//        while (cursor.moveToNext())
-//        {
-//            checkLoggedIn=cursor.getString(1);
-//
-//        }
-
-//        if (checkLoggedIn.equals("YES"))
-//        {
-//            Toast.makeText(this,checkLoggedIn, Toast.LENGTH_SHORT).show();
-//            Intent intent=new Intent(MainActivity.this,HomePageActivity.class);
-//            startActivity(intent);
-//            finish();
-//        }
+        sharedPrefManager=new SharedPrefManager(this);
 
         etUserName=(EditText)findViewById(R.id.userName);
         btnRegister=(Button)findViewById(R.id.registerBtn);
@@ -101,17 +81,12 @@ public class MainActivity extends AppCompatActivity {
                 userName=etUserName.getText().toString();
                 if (!TextUtils.isEmpty(userName) && gender!=null)
                 {
-                    //isLoggedIn="YES";
-                    //database.execSQL("insert into loveHistory values('"+userName+"','"+isLoggedIn+"','"+userName+"','"+userID+"')");
-                    Random rand = new Random();
-                    long number = rand.nextInt(9999999)+1;
-                    userID=userName+number+gender;
-                    DatabaseReference userDatabaseReference=databaseReference.child(userID);
-                    userDatabaseReference.child("Credentials").child("Name").setValue(userName);
-                    userDatabaseReference.child("Credentials").child("Gender").setValue(gender);
                     Intent intent=new Intent(MainActivity.this,HomePageActivity.class);
-                    intent.putExtra("userID",userID);
-                    intent.putExtra("userName",userName);
+                    SharedPreferences pref = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = pref.edit();
+                    editor.putString("userName", userName);
+                    editor.apply();
+                    sharedPrefManager.setIsLoggedIn(true);
                     startActivity(intent);
                     finish();
                 }

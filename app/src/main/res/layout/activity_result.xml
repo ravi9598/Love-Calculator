@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.instilive.lovely.ResultActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/resultToolbar"
+        android:background="?attr/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </android.support.v7.widget.Toolbar>
+
+    <TextView
+        android:layout_centerHorizontal="true"
+        android:textColor="#de11cc"
+        android:textStyle="bold"
+        android:padding="5dp"
+        android:fontFamily="@font/diplomata_sc"
+        android:id="@+id/loveResult"
+        android:textSize="25sp"
+        android:layout_marginTop="25dp"
+        android:layout_below="@+id/resultToolbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:id="@+id/random_image"
+        android:layout_marginTop="100dp"
+        android:layout_below="@id/loveResult"
+        android:layout_centerHorizontal="true"
+        android:layout_width="300dp"
+        android:layout_height="200dp" />
+
+</RelativeLayout>

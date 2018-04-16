@@ -6,6 +6,13 @@
     android:layout_height="match_parent"
     tools:context="com.instilive.lovely.ShareQuotesActivity">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/shareQuoteToolbar"
+        android:background="?attr/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </android.support.v7.widget.Toolbar>
+
     <LinearLayout
         android:layout_marginTop="90dp"
         android:orientation="vertical"
@@ -13,11 +20,23 @@
         android:layout_height="wrap_content">
 
         <EditText
-            android:background="@drawable/et_bg"
-            android:layout_gravity="center_horizontal"
+            android:textSize="24sp"
             android:id="@+id/quotes"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content" />
+            android:layout_width="340dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/et_bg"
+            android:fontFamily="cursive"
+            android:padding="5dp" />
+
+        <ImageView
+            android:id="@+id/shareQuoteImage"
+            android:scaleType="fitXY"
+            android:layout_marginTop="50dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="200dp" />
 
         <Button
             android:textSize="20sp"

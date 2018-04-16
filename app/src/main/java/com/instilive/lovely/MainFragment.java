@@ -11,9 +11,13 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.view.animation.DecelerateInterpolator;
+import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,21 +26,14 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-/**
- * Created by Ravi on 2/23/2018.
- */
-
 public class MainFragment extends Fragment{
 
-    private Bundle bundle;
-    private DatabaseReference databaseReference;
-    private String uID=null;
+    private SharedPrefManager sharedPrefManager;
     private String userName;
     private SQLiteDatabase database;
     private Handler handler;
-    private TextView res;
     private EditText etLover1,etLover2;
-    private Button btn;
+    private ImageView btn;
     private String strLover1,strLover2;
 
     @Nullable
@@ -44,21 +41,16 @@ public class MainFragment extends Fragment{
     public View onCreateView(final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
 
-        bundle=getActivity().getIntent().getExtras();
-//        database=getActivity().openOrCreateDatabase("MyDB",android.content.Context.MODE_PRIVATE ,null);
-//        Cursor cursor=database.rawQuery("select * from loveHistory",null);
-        userName=bundle.getString("userName");
-        uID=bundle.getString("userID");
+        btn=(ImageView) view.findViewById(R.id.btn);
+        animateButton();
 
-        databaseReference= FirebaseDatabase.getInstance().getReference().child("lovelyUsers").child(uID);
-
-        res=(TextView)view.findViewById(R.id.res);
-        etLover1=(EditText)view.findViewById(R.id.lover1);
-        etLover2=(EditText)view.findViewById(R.id.lover2);
-        btn=(Button)view.findViewById(R.id.btn);
-
+        sharedPrefManager=new SharedPrefManager(getActivity());
         database=getActivity().openOrCreateDatabase("DATABASE",android.content.Context.MODE_PRIVATE ,null);
         database.execSQL("create table if not exists loveHistory (Lover1 varchar, Lover2 varchar, Percentage int)");
+
+        userName=sharedPrefManager.getUserName();
+        etLover1=(EditText)view.findViewById(R.id.lover1);
+        etLover2=(EditText)view.findViewById(R.id.lover2);
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,37 +71,27 @@ public class MainFragment extends Fragment{
                         int ascii = (int) character;
                         sum += ascii;
                     }
-                    int initialResult=0;
                     int finalResult=sum%100;
-                    DatabaseReference historyReference=databaseReference.push();
-                    historyReference.child("lover1").setValue(strLover1);
-                    historyReference.child("lover2").setValue(strLover2);
-                    historyReference.child("result").setValue(finalResult);
+                    if(finalResult<=30)
+                    {
+                        finalResult=(100-finalResult)/2;
+                    }
                     database.execSQL("insert into loveHistory values('"+strLover1+"','"+strLover2+"','"+finalResult+"')");
-                    animateTextView(initialResult,finalResult,res);
-
+                    Intent intent=new Intent(getActivity(),ResultActivity.class);
+                    intent.putExtra("result",finalResult);
+                    startActivity(intent);
                 }
             }
         });
-
         return view;
     }
 
-    public void animateTextView( int initialValue, int finalValue, final TextView textview) {
-        DecelerateInterpolator decelerateInterpolator = new DecelerateInterpolator(0.5f);
-        int start = Math.min(initialValue, finalValue);
-        int end = Math.max(initialValue, finalValue);
-        int difference = Math.abs(finalValue - initialValue);
-        Handler handler = new Handler();
-        for (int count = start; count <= end; count++) {
-            int time = Math.round(decelerateInterpolator.getInterpolation((((float) count) / difference)) * 100) * count;
-            final int finalCount = ((initialValue > finalValue) ? initialValue - count : count);
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    textview.setText(finalCount + "%");
-                }
-            }, time);
-        }
+    private void animateButton() {
+        Animation animation = new AlphaAnimation(1, 0);
+        animation.setDuration(500);
+        animation.setInterpolator(new LinearInterpolator());
+        animation.setRepeatCount(Animation.INFINITE);
+        animation.setRepeatMode(Animation.REVERSE);
+        btn.startAnimation(animation);
     }
 }

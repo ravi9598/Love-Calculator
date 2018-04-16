@@ -1,58 +1,38 @@
 package com.instilive.lovely;
 
-import android.content.Intent;
+import android.content.Context;
+import android.media.Image;
+import android.os.Handler;
+import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.ShareActionProvider;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
-
 import java.util.Random;
 
-public class ShareQuotesActivity extends AppCompatActivity {
+public class ResultActivity extends AppCompatActivity {
 
+    private TextView res;
     private Bundle bundle;
-    private EditText etQuotes;
-    private Button btnShare;
-    private ShareActionProvider shareActionProvider;
     private ImageView randomImage;
-    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_share_quotes);
-
-        toolbar=(Toolbar)findViewById(R.id.shareQuoteToolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Share your quote");
-
-        randomImage=(ImageView)findViewById(R.id.shareQuoteImage);
-        etQuotes=(EditText)findViewById(R.id.quotes);
-        btnShare=(Button)findViewById(R.id.shareQuoteBtn);
+        setContentView(R.layout.activity_result);
 
         bundle=getIntent().getExtras();
-        etQuotes.setText(bundle.getString("Quote"));
-        etQuotes.setSelection(etQuotes.getText().length());
 
-        Random rand = new Random();
-        int  random = rand.nextInt(23) + 1;
-        setRandomImage(random);
-
-        btnShare.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String quote=etQuotes.getText().toString();
-                Intent intent=new Intent(Intent.ACTION_SEND);
-                intent.setType("text/plain");
-                intent.putExtra(Intent.EXTRA_TEXT,quote);
-                startActivity(Intent.createChooser(intent,"Share your thought via..."));
-            }
-        });
+        int initialResult=0;
+        int finalResult=bundle.getInt("result");
+        res=(TextView)findViewById(R.id.loveResult);
+        animateTextView(initialResult,finalResult,res);
+        //randomImage=(ImageView)findViewById(R.id.random_image);
+        //Random rand = new Random();
+       // int  random = rand.nextInt(23) + 1;
+        //setRandomImage(random);
 
     }
 
@@ -105,6 +85,24 @@ public class ShareQuotesActivity extends AppCompatActivity {
                 break;
             case 23:  randomImage.setImageResource(R.drawable.w);
                 break;
+        }
+    }
+
+    public void animateTextView( int initialValue, int finalValue, final TextView textview) {
+        DecelerateInterpolator decelerateInterpolator = new DecelerateInterpolator(1.5f);
+        int start = Math.min(initialValue, finalValue);
+        int end = Math.max(initialValue, finalValue);
+        int difference = Math.abs(finalValue - initialValue);
+        Handler handler = new Handler();
+        for (int count = start; count <= end; count++) {
+            int time = Math.round(decelerateInterpolator.getInterpolation((((float) count) / difference)) * 100) * count;
+            final int finalCount = ((initialValue > finalValue) ? initialValue - count : count);
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    textview.setText(finalCount + "%");
+                }
+            }, time);
         }
     }
 }

@@ -1,11 +1,11 @@
 package com.instilive.lovely;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.ShareActionProvider;
@@ -23,10 +23,10 @@ import android.widget.Toast;
 
 public class HomePageActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    SQLiteDatabase sqLiteDatabase;
+    private SharedPrefManager sharedPrefManager;
     private ShareActionProvider shareActionProvider;
-    private TextView textView;
-
+    private TextView userName;
+    private Bundle bundle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,15 +36,11 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Home");
 
+
+
         FragmentManager fragmentManager=getSupportFragmentManager();
         FragmentTransaction transaction=fragmentManager.beginTransaction();
         transaction.replace(R.id.content,new MainFragment()).commit();
-
-        sqLiteDatabase=openOrCreateDatabase("MyDB",android.content.Context.MODE_PRIVATE ,null);
-        Cursor cursor=sqLiteDatabase.rawQuery("select * from loveHistory",null);
-
-        textView=(TextView)findViewById(R.id.textView);
-        //textView.setText("Hello "+cursor.getString(cursor.getColumnIndex("UserName")));
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -54,6 +50,12 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        View header = navigationView.getHeaderView(0);
+        SharedPreferences sharedPref = getSharedPreferences(MainActivity.MyPREFERENCES, MODE_PRIVATE);
+        String name=sharedPref.getString("userName","hhh");
+        userName=header.findViewById(R.id.nav_user_name);
+        userName.setText("Hello "+name);
     }
 
     @Override
@@ -68,19 +70,14 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.home_page, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_about) {
             Intent intent=new Intent(HomePageActivity.this,AboutUsActivity.class);
             startActivity(intent);

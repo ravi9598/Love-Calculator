@@ -18,12 +18,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_below="@+id/about_name"
+        android:id="@+id/aboutLogo"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/logo"
+        android:layout_width="70dp"
+        android:layout_height="70dp" />
+
     <LinearLayout
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:orientation="vertical"
         android:layout_marginLeft="26dp"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/about_name"
+        android:layout_below="@+id/aboutLogo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 

@@ -14,10 +14,6 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-/**
- * Created by Ravi on 2/23/2018.
- */
-
 public class HistoryFragment extends Fragment{
 
     private SQLiteDatabase database;
@@ -33,22 +29,38 @@ public class HistoryFragment extends Fragment{
 
         database=getActivity().openOrCreateDatabase("DATABASE",android.content.Context.MODE_PRIVATE ,null);
         Cursor cursor=database.rawQuery("select * from loveHistory",null);
-
+        arrayList=new ArrayList<String>();
         while (cursor.moveToNext())
         {
             lover1=cursor.getString(0);
             lover2=cursor.getString(1);
             percentage=cursor.getString(2);
+            String historyText=null;
+            int result = Integer.parseInt(percentage);
+            if (result<30)
+            {
+                historyText="Need to work hard to get your love.\n";
+            }
+            else if (result>=30 && result<50)
+            {
+                historyText="You have a good chance to get your crush.\n";
+            }
+            else if (result>=50 && result<70)
+            {
+                historyText="Wow, there is a strong bonding between you.\n";
+            }
+            else
+            {
+                historyText="God has made both of you for each other.\n";
+            }
+            arrayList.add(historyText+"Depth of love between "+lover1+" and "+lover2+" is "+percentage+" %");
         }
 
-
         listView=(ListView)view.findViewById(R.id.historyListView);
-        arrayList=new ArrayList<String>();
+
         arrayAdapter=new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,arrayList);
         listView.setAdapter(arrayAdapter);
 
-        arrayList.add(lover1+" "+lover2+" "+percentage);
-        arrayAdapter.notifyDataSetChanged();
 
         return view;
     }
