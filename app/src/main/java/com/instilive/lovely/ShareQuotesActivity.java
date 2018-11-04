@@ -30,6 +30,18 @@ public class ShareQuotesActivity extends AppCompatActivity {
         toolbar=(Toolbar)findViewById(R.id.shareQuoteToolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Share your quote");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ShareQuotesActivity.this, HomePageActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                finish();
+            }
+        });
+
 
         randomImage=(ImageView)findViewById(R.id.shareQuoteImage);
         etQuotes=(EditText)findViewById(R.id.quotes);
@@ -50,7 +62,7 @@ public class ShareQuotesActivity extends AppCompatActivity {
                 Intent intent=new Intent(Intent.ACTION_SEND);
                 intent.setType("text/plain");
                 intent.putExtra(Intent.EXTRA_TEXT,quote);
-                startActivity(Intent.createChooser(intent,"Share your thought via..."));
+                startActivity(Intent.createChooser(intent,"Share your quote via..."));
             }
         });
 

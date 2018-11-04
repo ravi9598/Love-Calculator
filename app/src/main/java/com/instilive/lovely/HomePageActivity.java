@@ -1,10 +1,6 @@
 package com.instilive.lovely;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -19,14 +15,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class HomePageActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-
-    private SharedPrefManager sharedPrefManager;
-    private ShareActionProvider shareActionProvider;
-    private TextView userName;
-    private Bundle bundle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,11 +26,9 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Home");
 
-
-
         FragmentManager fragmentManager=getSupportFragmentManager();
         FragmentTransaction transaction=fragmentManager.beginTransaction();
-        transaction.replace(R.id.content,new MainFragment()).commit();
+        transaction.replace(R.id.content,new HomeFragment()).commit();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -52,10 +40,7 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
         navigationView.setNavigationItemSelectedListener(this);
 
         View header = navigationView.getHeaderView(0);
-        SharedPreferences sharedPref = getSharedPreferences(MainActivity.MyPREFERENCES, MODE_PRIVATE);
-        String name=sharedPref.getString("userName","hhh");
-        userName=header.findViewById(R.id.nav_user_name);
-        userName.setText("Hello "+name);
+
     }
 
     @Override
@@ -68,25 +53,6 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.home_page, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.action_about) {
-            Intent intent=new Intent(HomePageActivity.this,AboutUsActivity.class);
-            startActivity(intent);
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -95,7 +61,8 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
         int id = item.getItemId();
 
         if (id==R.id.nav_home){
-            transaction.replace(R.id.content,new MainFragment()).commit();
+            transaction.replace(R.id.content,new HomeFragment()).commit();
+            getSupportActionBar().setTitle("Home");
         }
         else if (id == R.id.nav_history) {
             transaction.replace(R.id.content,new HistoryFragment()).commit();
@@ -108,7 +75,7 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
         else if (id==R.id.nav_share){
             Intent intent=new Intent(Intent.ACTION_SEND);
             intent.setType("text/plain");
-            intent.putExtra(Intent.EXTRA_TEXT,"My fucking app");
+            intent.putExtra(Intent.EXTRA_TEXT,"Check out Love Calculator");
             startActivity(Intent.createChooser(intent,"Share via"));
         }
 

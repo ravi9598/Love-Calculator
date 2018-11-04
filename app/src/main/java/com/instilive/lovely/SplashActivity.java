@@ -9,8 +9,7 @@ import android.view.WindowManager;
 
 public class SplashActivity extends AppCompatActivity {
 
-    private final int SPLASH_DISPLAY_LENGTH = 2500;
-    private SharedPrefManager sharedPrefManager;
+    private final int SPLASH_DISPLAY_LENGTH = 1500;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,33 +18,12 @@ public class SplashActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash);
 
-        sharedPrefManager=new SharedPrefManager(this);
-
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-
-                if (sharedPrefManager.isLoggedIn())
-                {
-                    moveToHomePageActivity();
-                }
-
-                else
-                {
-                    moveToMainActivity();
-                }
+                startActivity(new Intent(SplashActivity.this, HomePageActivity.class));
+                finish();
             }
         },SPLASH_DISPLAY_LENGTH);
-    }
-
-    private void moveToHomePageActivity() {
-        startActivity(new Intent(this, HomePageActivity.class));
-        finish();
-    }
-    private void moveToMainActivity()
-    {
-        Intent intent=new Intent(SplashActivity.this,MainActivity.class);
-        startActivity(intent);
-        finish();
     }
 }

@@ -3,9 +3,6 @@ package com.instilive.lovely;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-/**
- * Created by Ravi on 2/24/2018.
- */
 
 public class SharedPrefManager {
     private SharedPreferences sharedPref;
@@ -15,7 +12,7 @@ public class SharedPrefManager {
     private String userID;
 
     private static final String SHARED_PREF = "SharedPref";
-    private static final String IS_LOGGED_IN = "isLoggedIn";
+    private static final String IS_TABLE_CREATED="isTableCreated";
 
 
     public SharedPrefManager(Context context){
@@ -23,19 +20,11 @@ public class SharedPrefManager {
         editor = sharedPref.edit();
     }
 
-    public boolean isLoggedIn() {
-        return sharedPref.getBoolean(IS_LOGGED_IN, false);
+    public void setIsTableCreated(boolean isTableCreated){
+        editor.putBoolean(IS_TABLE_CREATED,isTableCreated).apply();
     }
 
-    public void setIsLoggedIn(boolean isLoggedIn){
-        editor.putBoolean(IS_LOGGED_IN, isLoggedIn).apply();
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public boolean isTableCreated(){
+        return sharedPref.getBoolean(IS_TABLE_CREATED,false);
     }
 }

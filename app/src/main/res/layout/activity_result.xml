@@ -1,37 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.instilive.lovely.ResultActivity">
 
-    <android.support.v7.widget.Toolbar
+    <include
         android:id="@+id/resultToolbar"
-        android:background="?attr/colorPrimary"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </android.support.v7.widget.Toolbar>
+        layout="@layout/toolbar"/>
 
-    <TextView
-        android:layout_centerHorizontal="true"
-        android:textColor="#de11cc"
-        android:textStyle="bold"
-        android:padding="5dp"
-        android:fontFamily="@font/diplomata_sc"
-        android:id="@+id/loveResult"
-        android:textSize="25sp"
-        android:layout_marginTop="25dp"
+    <LinearLayout
+        android:layout_marginTop="15dp"
+        android:gravity="center_horizontal"
         android:layout_below="@+id/resultToolbar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/random_image"
-        android:layout_marginTop="100dp"
-        android:layout_below="@id/loveResult"
-        android:layout_centerHorizontal="true"
-        android:layout_width="300dp"
-        android:layout_height="200dp" />
+        <TextView
+            android:text="Ravi Prakash"
+            android:textColor="@color/colorPrimary"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:fontFamily="cursive"
+            android:id="@+id/result_lover_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:id="@+id/heart"
+            android:src="@drawable/heart"
+            android:layout_width="60dp"
+            android:layout_height="60dp" />
+
+        <TextView
+            android:text="Ravi Prakash"
+            android:textColor="@color/colorPrimary"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:fontFamily="cursive"
+            android:id="@+id/result_lover_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_centerInParent="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/love_button"
+                android:id="@+id/_image"
+                android:layout_width="match_parent"
+                android:layout_height="200dp" />
+
+            <TextView
+                android:layout_centerInParent="true"
+                android:textColor="@color/color_white"
+                android:textStyle="bold"
+                android:padding="5dp"
+                android:fontFamily="@font/diplomata_sc"
+                android:id="@+id/loveResult"
+                android:textSize="25sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:textColor="@color/colorPrimary"
+            android:fontFamily="@font/sofia"
+            android:textSize="20sp"
+            android:id="@+id/result_quote"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:background="@drawable/btn_bg"
+            android:textSize="19dp"
+            android:textAllCaps="false"
+            android:text="Share"
+            android:layout_marginTop="15dp"
+            android:id="@+id/result_share_btn"
+            android:layout_width="150dp"
+            android:layout_height="50dp"/>
+
+    </LinearLayout>
 
 </RelativeLayout>
